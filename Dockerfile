@@ -6,9 +6,9 @@ RUN wget "http://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-c
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/
 
-ADD . /go/src/github.com/jnummelin/go-inception-client
+ADD . /go/src/github.com/bmwhopper/go-inception-client
 
-WORKDIR  /go/src/github.com/jnummelin/go-inception-client
+WORKDIR  /go/src/github.com/bmwhopper/go-inception-client
 
 RUN go get github.com/golang/protobuf/ptypes/wrappers && \
     go get github.com/tensorflow/tensorflow/tensorflow/go && \
@@ -27,6 +27,6 @@ RUN apt-get update && apt-get install -y wget && \
 
 ENV LD_LIBRARY_PATH=/usr/local/lib/
 
-COPY --from=builder /go/src/github.com/jnummelin/go-inception-client/app .
+COPY --from=builder /go/src/github.com/bmwhopper/go-inception-client/app .
 
 CMD ["./app"]
