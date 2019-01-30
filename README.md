@@ -4,7 +4,7 @@ This repo has an example how to utilize TensorFlow models with containers.
 
 ## The model
 
-The example inception model for image classification can be built as container image using `Dockerfile.model` file. It will download the model and put it to be served by tensorrflow-service component.
+The example inception model for image classification can be built as container image using `Dockerfile.model` file. It will download the model and put it to be served by tensorflow-service component.
 
 ## API
 
@@ -12,11 +12,10 @@ The model servicing API is somewhat complex to use, so there's a simplified Go A
 
 ## Deploying
 
-There's a ready stack file to deploy everything on Kontena, so get you Kontena up-and-running. See https://kontena.io/docs/quick-start.html to get up-and-running in no time.
-
-After you have Kontena platform running, you can install the stack with `kontena stack install jussi/tensorflow-example`
+There's a ready stack file to deploy everything on Kubernetes.
 
 To test it out, you can use e.g. curl:
+
 ```
 $ curl -s -XPOST -F "file=@/Users/bmathews/Downloads/jojo.jpg" image-classifier.docker/classify | jq .
 [
