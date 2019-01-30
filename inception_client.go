@@ -1,46 +1,32 @@
 // Tensorflow Serving Go client for the inception model
-
 // First of all compile the proto files:
 // git clone --recursive https://github.com/tensorflow/serving.git
-// protoc -I=serving -I serving/tensorflow --go_out=plugins=grpc:$GOPATH/src serving/tensorflow_serving/apis/*.proto
-// protoc -I=serving/tensorflow --go_out=plugins=grpc:$GOPATH/src serving/tensorflow/tensorflow/core/framework/*.proto
-// protoc -I=serving/tensorflow --go_out=plugins=grpc:$GOPATH/src serving/tensorflow/tensorflow/core/protobuf/{saver,meta_graph}.proto
-// protoc -I=serving/tensorflow --go_out=plugins=grpc:$GOPATH/src serving/tensorflow/tensorflow/core/example/*.proto
-
 package main
-
 import (
     "context"
     "log"
-
     pb "github.com/jnummelin/go-inception-client/tensorflow_serving/apis"
-
-    tf_core_framework "github.com/jnummelin/go-inception-client/tensorflow/core/framework"
-
+    tf_core_framework "github.com/bmwhopper/go-inception-client/tensorflow/core/framework"
     google_protobuf "github.com/golang/protobuf/ptypes/wrappers"
     tf "github.com/tensorflow/tensorflow/tensorflow/go"
-
     "google.golang.org/grpc"
 )
 
 type InceptionClient struct {
     ServingAddress string
 }
-
-// Predict
+// Predictor
 func (i InceptionClient) Predict(imageBytes []byte) (*pb.PredictResponse, error) {
     tensor, err := tf.NewTensor(string(imageBytes))
     if err != nil {
         log.Fatalln("Cannot read image file")
         return nil, err
     }
-
     tensorString, ok := tensor.Value().(string)
     if !ok {
         log.Fatalln("Cannot type assert tensor value to string")
         return nil, err
     }
-
     request := &pb.PredictRequest{
         ModelSpec: &pb.ModelSpec{
             Name:          "inception",
