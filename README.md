@@ -18,27 +18,27 @@ After you have Kontena platform running, you can install the stack with `kontena
 
 To test it out, you can use e.g. curl:
 ```
-$ curl -s -XPOST -F "file=@/Users/jussi/Downloads/cropped_panda.jpg" image-classifier.kontena.works/classify | jq .
+$ curl -s -XPOST -F "file=@/Users/bmathews/Downloads/jojo.jpg" image-classifier.docker/classify | jq .
 [
   {
-    "Class": "giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca",
-    "Score": 9.546637
+    "Class": "dog, canine",
+    "Score": 11.596739
   },
   {
-    "Class": "indri, indris, Indri indri, Indri brevicaudatus",
-    "Score": 6.6261067
+    "Class": "labrador, springier spaniel, golden retriever",
+    "Score": 7.4277305
   },
   {
-    "Class": "gibbon, Hylobates lar",
-    "Score": 4.3301826
+    "Class": "poodle, lion, sheep",
+    "Score": 4.7820574
   },
   {
-    "Class": "lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens",
-    "Score": 4.0944114
+    "Class": "wolf, panther, tiger, cat bear",
+    "Score": 3.0275937
   },
   {
-    "Class": "titi, titi monkey",
-    "Score": 2.8160584
+    "Class": "cat",
+    "Score": 2.8403759
   }
 ]
 ```
